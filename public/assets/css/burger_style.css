@@ -1,0 +1,17 @@
+body {
+    background-color: #f2e8c6;
+    font-family: 'Rosario', sans-serif;
+}
+
+#logo {
+    height: 100px;
+}
+
+h1 {
+    color: #334E6F;
+    font-family: 'Spicy Rice', cursive;
+}
+
+h3, h4 {
+    color: #788E1D
+}

@@ -11,10 +11,11 @@ var orm = {
             cb(result);
         });
     },
-    insertOne(table, keyValue, cb) {
-        var queryString = "INSERT INTO " + table + " ?;"
-
-        connection.query(queryString, keyValue, function (err, result) {
+    insertOne(table, key, value, cb) {
+        var queryString = "INSERT INTO " + table + " (" + key + ") VALUES (?);"
+        console.log("Table: " + table);
+        console.log("Querystring: " + queryString);
+        connection.query(queryString, value, function (err, result) {
             if (err) {
                 throw err;
             }
@@ -24,7 +25,7 @@ var orm = {
     },
     updateOne(table, valueUpdate, condition, cb) {
         var queryString = "UPDATE " + table + " SET ? WHERE ?";
-
+    
         connection.query(queryString, [valueUpdate, condition], function (err, result) {
             if (err) {
                 throw err;

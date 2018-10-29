@@ -1,0 +1,110 @@
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-12">
+            {{!-- image will go here --}}
+            <img id="logo" src="assets/img/burger.png" alt="burgerlogo">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>EatABurger</h1>
+            <h4>Have some tasty virtual burgers.</h4>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            {{!-- available burgers --}}
+            <h3>
+                Available Burgers:
+            </h3>
+            <hr>
+            <ul>
+                {{#each burgers}}
+                    {{#unless devoured}}
+                        <li>
+                            <div class="mt-2 mb-2 row">
+                                <div class="col text-left">
+                                    <h5>{{this.burger_name}}</h5>
+                                </div>
+                                <div class="col text-right">
+                                    <button class="devour-burger btn btn-danger text-right" data-id="{{this.id}}">
+                                        DEVOUR
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            {{!-- devoured burgers --}}
+            <h3>
+                Devoured Burgers:
+            </h3>
+            <hr>
+            <ul>
+                {{#each burgers}}
+                    {{#if devoured}}
+                    <li>
+                        <div class="mt-2 mb-2 row">
+                            <div class="col-md-12 text-left">
+                                <h5>{{this.burger_name}}</h5>
+                            </div>
+                        </div>
+                    </li>
+                    {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Add a burger!
+            </h3>
+            <form class="text-left add-burger">
+                <div class="form-group">
+                    <label for="new-burger">Burger Name:</label>
+                    <input type="text" class="form-control" id="new-burger" placeholder="Krabby Patty">
+                </div>
+                <button type="submit" class="btn btn-success">Submit That Burger!</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(".devour-burger").on("click", function(event) {
+        
+        var id = $(this).data("id");
+
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT"
+        }).then( function() {
+            console.log("Devoured burger with ID " + id);
+            location.reload();
+        });
+    });
+
+    $(".add-burger").on("submit", function(event) {
+        event.preventDefault();
+        var name = $("#new-burger").val().trim();
+        var newBurger = {
+            burger_name: name
+        }
+
+        console.log("Attempting to create burger with name " + name);
+
+        $.ajax("/api/burgers/", {
+            type: "POST",
+            data: newBurger
+        }).then( function() {
+            console.log("Added new burger.");
+            location.reload();
+        });
+    });
+</script>
