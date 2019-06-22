@@ -4,4 +4,4 @@
 
 *EatABurger* is a full-stack app powered by Express.js, MySQL, and Handlebars.js. It also features a custom-built ORM to run its SQL queries and follows the MVC design pattern.
 
-The app's connection information and ORM is stored in */config/*. Its controller logic is stored in */controllers/burgers_controller.js*. SQL files for starting a copy of the database are found in */db/* and the burger model is in */models/burger.js* Public-facing stylesheets and the logo can be found in */assets/*, and the handlebars views and layouts can be found in */views/*
+The app's connection information and ORM is stored in */config/*. Its controller logic is stored in */controllers/burgers_controller.js*. SQL files for starting a copy of the database are found in */db/* and the burger model is in */models/burger.js* Public-facing stylesheets and the logo can be found in */assets/*, and the handlebars views and layouts can be found in */views/*.
